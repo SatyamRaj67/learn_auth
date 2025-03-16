@@ -2,7 +2,7 @@ import { Resend } from "resend";
 
 const resend = new Resend();
 
-const domain = process.env.NEXT_PUBLIC_APP_URL;
+const domain = process.env.NEXT_PUBLIC_API_URL;
 
 export const sendTwoFactorEmail = async (email: string, token: string) => {
   await resend.emails.send({

@@ -1,12 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { BeatLoader } from "react-spinners";
-import { CardWrapper } from "@/components/auth/card-wrapper";
+
 import { useSearchParams } from "next/navigation";
+
 import { newVerification } from "@/actions/new-verification";
+
+import { CardWrapper } from "@/components/auth/card-wrapper";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { LoadingSpinner } from "@/components/ui/spinner";
 
 export const NewVerificationForm = () => {
   const [error, setError] = useState<string | undefined>();
@@ -45,7 +48,7 @@ export const NewVerificationForm = () => {
       backButtonHref="/auth/login"
     >
       <div className="flex items-center w-full justify-center">
-        {!success && !error && <BeatLoader />}
+        {!success && !error && <LoadingSpinner />}
         <FormSuccess message={success} />
         {!success && <FormError message={error} />}
       </div>

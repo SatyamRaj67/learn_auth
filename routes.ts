@@ -11,7 +11,15 @@ export const authRoutes = [
   "/auth/register",
   "/auth/error",
   "/auth/reset",
-  "/auth/new-password"
+  "/auth/new-password",
+];
+
+/**An Array of routes that are user only by admins
+ These routes will redirect loggen in users to /settings
+ if they are not admins
+ @type {string[]} */
+export const adminRoutes = [
+  "/admin/dashboard",
 ];
 
 /** Prefix for API Auth routes

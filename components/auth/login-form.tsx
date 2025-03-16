@@ -26,6 +26,13 @@ import { login } from "@/actions/login";
 import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -90,14 +97,29 @@ export const LoginForm = () => {
                 control={form.control}
                 name="code"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel> Two Factor Code</FormLabel>
-                    <FormControl>
-                      <Input
+                  <FormItem className="flex flex-col items-center">
+                    <FormLabel className="text-center">
+                      Two-Factor Code
+                    </FormLabel>
+                    <FormControl className="flex justify-center">
+                      <InputOTP
                         {...field}
+                        maxLength={6}
                         disabled={isPending}
-                        placeholder="123456"
-                      />
+                        pattern={REGEXP_ONLY_DIGITS}
+                      >
+                        <InputOTPGroup>
+                          <InputOTPSlot index={0} />
+                          <InputOTPSlot index={1} />
+                          <InputOTPSlot index={2} />
+                        </InputOTPGroup>
+                        <InputOTPSeparator />
+                        <InputOTPGroup>
+                          <InputOTPSlot index={3} />
+                          <InputOTPSlot index={4} />
+                          <InputOTPSlot index={5} />
+                        </InputOTPGroup>
+                      </InputOTP>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -105,7 +127,7 @@ export const LoginForm = () => {
               />
             )}
             {!showTwoFactor && (
-              <div>
+              <div className="space-y-4">
                 <FormField
                   control={form.control}
                   name="email"
